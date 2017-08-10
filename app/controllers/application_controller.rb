@@ -36,7 +36,7 @@ class ApplicationController < ActionController::API
   end
 
   def secret
-    "museevents"
+    "events"
   end
 
   def algorithm
