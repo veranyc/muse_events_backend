@@ -7,7 +7,7 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def create
-    note = Event.create(event_params)
+    event = Event.create(event_params)
     render json: event, status: 201
   end
 
@@ -17,7 +17,7 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def destroy
-    noteId = @event.id
+    eventId = @event.id
     @event.destroy
     render json: {message: "Your event has been deleted", eventId:eventId}
   end
@@ -27,9 +27,9 @@ class Api::V1::EventsController < ApplicationController
   end
 
   private
-  # def event_params
-  #   params.permit(:user_id)
-  # end
+  def event_params
+    params.permit(:user_id)
+  end
 
   def set_event
     @event = Event.find(params[:id])
