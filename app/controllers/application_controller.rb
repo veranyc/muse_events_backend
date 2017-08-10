@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-  class ApplicationController < ActionController::API
   private
 
   def issue_token payload
