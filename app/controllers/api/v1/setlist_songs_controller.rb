@@ -1,13 +1,13 @@
 class Api::V1::SetlistSongsController < ApplicationController
-  before_action :set_setlist_songs, only: [:show,:update,:destroy]
+  before_action :set_setlist_song, only: [:show,:update,:destroy]
 
   def index
-    setlist_songs = Setlist_Song.all
+    setlist_songs = SetlistSong.all
     render json: setlist_songs, status: 200
   end
 
   def create
-    setlist_song = Setlist_Song.create(setlist_songs_params)
+    setlist_song = SetlistSong.create(setlist_songs_params)
     render json: setlist_song, status: 201
   end
 
@@ -32,6 +32,6 @@ class Api::V1::SetlistSongsController < ApplicationController
   end
 
   def set_setlist_song
-    @setlist_song = Setlist_song.find(params[:id])
+    @setlist_song = SetlistSong.find(params[:id])
   end
 end
