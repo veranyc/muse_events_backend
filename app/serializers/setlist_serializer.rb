@@ -1,5 +1,5 @@
 class SetlistSerializer < ActiveModel::Serializer
-  attributes :id, :event_id
+  attributes :id, :event_id, :setlist_songs, :setlist_id
 
   belongs_to :event
   has_many :setlist_songs

@@ -1,5 +1,5 @@
 class PictureSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :caption, :link, :event_id
 
   belongs_to :event
   has_many :setlist_songs

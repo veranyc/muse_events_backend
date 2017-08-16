@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :name, :link
+  attributes :id, :type, :link
 
   belongs_to :event
 end
