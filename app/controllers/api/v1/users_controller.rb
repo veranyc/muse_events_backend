@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    before_action :set_user, only: [:show,:update,:destroy]
+    before_action :set_user, only: [:show,:update,:delete]
 
     def index
       users = User.all
@@ -7,17 +7,27 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def create
-      user = User.create(user_params)
-      render json: user, status: 201
+      @user = User.new(user_params)
+      @user.save
+
+      if @user.save
+        created_jwt = issue_token(id: @user.id)
+        render json: { username: @user.username, jwt: created_jwt }
+      else
+        render json: {
+          error: 'Username already exists'
+        }, status: 422
+      end
     end
 
     def update
+      @user = User.find(params[:id])
       @user.update(user_params)
       render json: @user, status: 200
     end
 
-    def destroy
-      userId = @user.id
+    def delete
+      @user = User.find(params[:id])
       @user.destroy
       render json: {message:"Your user has been deleted", userId:userId}
     end
