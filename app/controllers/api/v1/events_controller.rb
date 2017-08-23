@@ -1,5 +1,5 @@
 class Api::V1::EventsController < ApplicationController
-  before_action :set_event, only: [:show,:update,:destroy]
+  # before_action :set_event, only: [:show,:update,:destroy]
 
   def index
     events = Event.all
@@ -7,8 +7,16 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def create
-    event = Event.create(event_params)
-    render json: event, status: 201
+    @event = Event.new(event_params)
+    # render json: @event, status: 201
+    if !!@event.save
+      @event.save
+      render json: {
+        id: @event.id
+        }
+    else
+      render json: {errors: @event.errors.full_messages}
+    end
   end
 
   def update
@@ -28,10 +36,10 @@ class Api::V1::EventsController < ApplicationController
 
   private
   def event_params
-    params.permit(:user_id)
+    params.permit(:user_id, :slfm_setlist)
   end
-
-  def set_event
-    @event = Event.find(params[:id])
-  end
+  #
+  # def set_event
+  #   @event = Event.find(params[:id])
+  # end
 end
