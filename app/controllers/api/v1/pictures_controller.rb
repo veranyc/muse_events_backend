@@ -28,7 +28,7 @@ class Api::V1::PicturesController < ApplicationController
 
   private
   def picture_params
-    params.permit(:title, :event_id)
+    params.permit(:title, :event_id, :caption, :link)
   end
 
   def set_picture
